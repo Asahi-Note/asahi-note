@@ -1,5 +1,4 @@
 // ignore_for_file: non_constant_identifier_names
-
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'dart:convert';
@@ -10,7 +9,9 @@ ApiData kancolleData = ApiData();
 // 读取 JSON 文件并解析
 Future<void> loadJsonData() async {
   if (kancolleData.api_result == 1) return;
-  String jsonString = await rootBundle.loadString('assets/getData.json');
+  String jsonString = await rootBundle.loadString(
+    '${kReleaseMode ? 'assets/' : ''}getData.json',
+  );
   kancolleData = ApiData.fromJson(jsonDecode(jsonString));
 }
 

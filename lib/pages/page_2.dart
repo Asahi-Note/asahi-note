@@ -72,8 +72,57 @@ class _Page2State extends State<Page2> {
               Divider(), // Header 下方的分隔線
               ...ships.map((item) {
                 return ListTile(
-                  onTap: () {
-                    Navigator.of(context).pushNamed('/page3', arguments: item);
+                  onTap: () async {
+                    await showDialog<void>(
+                      context: context,
+                      builder:
+                          (context) => FadeTransition(
+                            opacity: AlwaysStoppedAnimation(1.0),
+                            child: AlertDialog(
+                              content: SizedBox(
+                                child: Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    Positioned(
+                                      child: InkResponse(
+                                        onTap: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const CircleAvatar(
+                                          backgroundColor: Colors.orangeAccent,
+                                          child: Icon(Icons.arrow_back),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(20.0),
+                                        child: Wrap(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Icon(Icons.ac_unit_rounded),
+                                              ],
+                                            ),
+                                            Column(
+                                              children: [Text(item.api_name)],
+                                            ),
+                                            Column(
+                                              children: [Text(item.api_name)],
+                                            ),
+                                            Column(
+                                              children: [Text(item.api_name)],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                    );
                   },
                   contentPadding: EdgeInsets.all(8),
                   title: Row(
